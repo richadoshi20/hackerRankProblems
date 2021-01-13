@@ -1,0 +1,51 @@
+static SinglyLinkedListNode insertNodeAtPosition(SinglyLinkedListNode head, int data, int position) {
+        SinglyLinkedListNode currPtr = head;
+        SinglyLinkedListNode prevPtr = head;
+        
+        if(head == null)    {   //empty list
+            return new SinglyLinkedListNode(data);
+        }else if (head.next == null) { //if there is only one element in the list
+            SinglyLinkedListNode newNode = new SinglyLinkedListNode(data);
+            newNode.next = head;
+            return newNode;
+        }
+        int count = 0;
+        while(currPtr.next != null)    { //general insertion in the middle of the list
+            if  (count == position) {
+                SinglyLinkedListNode newNode = new SinglyLinkedListNode(data);
+                prevPtr.next = newNode;
+                newNode.next = currPtr;
+                return head;
+            }
+            prevPtr = currPtr;
+            currPtr = currPtr.next;
+            count++;
+        }
+        if  (count == position) { //if insertion is in last position
+            SinglyLinkedListNode newNode = new SinglyLinkedListNode(data);
+            prevPtr.next = newNode;
+            newNode.next = currPtr;
+            return head;
+        }
+        return head;
+        
+        /*
+        Better Solution
+        Node node = head;
+            if (position == 0){
+                node = new Node();
+                node.data = data;
+                node.next = head;
+                return node;
+            }else {
+                while(--position > 0){
+                    node = node.next;
+                }
+                Node i = node.next;
+                node.next = new Node();
+                node.next.data = data;
+                node.next.next = i;
+                return head;
+            }
+        */
+    }
