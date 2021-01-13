@@ -1,0 +1,13 @@
+static SinglyLinkedListNode deleteNode(SinglyLinkedListNode head, int position) {
+        SinglyLinkedListNode node = head;
+        if  (position == 0) {
+            if  (head.next == null) return null; //if only one item is present in list and it has to be deleted then return null
+            head = head.next;
+        }
+        while   (--position > 0)    {
+            node = node.next;
+        }
+        node.next = node.next.next;
+        return head;
+
+    }
