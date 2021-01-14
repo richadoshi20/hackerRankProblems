@@ -1,0 +1,21 @@
+static int getNode(SinglyLinkedListNode head, int pos) {
+        //Brute force approach
+        SinglyLinkedListNode node = head;
+        SinglyLinkedListNode prev = head;
+        // int count = 0;
+        // while   (node != null)  {
+        //     count++;
+        //     node = node.next;
+        // }
+        // count = count-pos-1;
+        // node = head;
+        // while (count != 0) {
+        //     head = head.next;
+        //     count--;
+        // }
+        // return head.data;
+        //p-N approach
+        int count = 0;
+        while(count++ != pos){
+            node = node.next;
+        }
