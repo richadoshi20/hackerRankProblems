@@ -1,4 +1,4 @@
-static int getNode(SinglyLinkedListNode head, int pos) {
+ static int getNode(SinglyLinkedListNode head, int pos) {
         //Brute force approach
         SinglyLinkedListNode node = head;
         SinglyLinkedListNode prev = head;
@@ -19,3 +19,10 @@ static int getNode(SinglyLinkedListNode head, int pos) {
         while(count++ != pos){
             node = node.next;
         }
+        while(node.next != null) {
+            node = node.next;
+            prev = prev.next;
+        }
+        return prev.data;
+    }
+   
