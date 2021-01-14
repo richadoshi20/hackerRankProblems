@@ -1,0 +1,18 @@
+static SinglyLinkedListNode mergeLists(SinglyLinkedListNode head1, SinglyLinkedListNode head2) {
+
+    SinglyLinkedListNode dummy = new SinglyLinkedListNode(0);
+    SinglyLinkedListNode node = dummy;
+    
+    while(head1!=null && head2!=null){
+       if(head1.data <= head2.data){
+           dummy.next = head1;
+           head1 = head1.next;
+       }else {
+           dummy.next = head2;
+           head2 = head2.next;           
+       }
+       dummy = dummy.next;
+    }
+    if(head1 == null){
+        dummy.next = head2;
+    }
