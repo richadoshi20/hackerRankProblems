@@ -1,0 +1,28 @@
+static int findMergeNode(SinglyLinkedListNode head1, SinglyLinkedListNode head2) {
+    // HashSet<SinglyLinkedListNode> set = new HashSet<>();
+    // while(head1 !=null){
+    //     set.add(head1);
+    //     head1 = head1.next;
+    // }
+    // while(head2 !=null){
+    //    if (set.contains(head2)) 
+    //      return head2.data;
+    //     head2 = head2.next;
+    // }
+    // return 0;
+    SinglyLinkedListNode fstPtr = head1;
+    SinglyLinkedListNode secPtr = head2;
+    while(fstPtr != secPtr) {
+        fstPtr = fstPtr.next;
+        secPtr = secPtr.next;
+        if(fstPtr == null) fstPtr = head2;
+        if(secPtr == null) secPtr = head1;
+    }
+    return fstPtr.data;
+    }
+    
+    /*
+    1->2->3->4->
+                5->null
+          1->2->
+    */
