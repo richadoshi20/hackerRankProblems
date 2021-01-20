@@ -1,0 +1,35 @@
+/* 
+    
+    class Node 
+    	int data;
+    	Node left;
+    	Node right;
+	*/
+	public static void topView(Node root) {
+      
+      class QueueObj {
+        Node node;
+        int hd;
+        public QueueObj(Node node,int hd)  {
+            this.node = node;
+            this.hd = hd;
+        }
+      }
+      Queue<QueueObj> queue = new LinkedList<QueueObj>();
+      Map<Integer,Integer> topViewData = new TreeMap<>();
+      queue.add(new QueueObj(root,0));
+      while (!queue.isEmpty())  {
+          QueueObj currNode = queue.poll();
+          if (!topViewData.containsKey(currNode.hd))   {
+              topViewData.put(currNode.hd, currNode.node.data);
+          }
+          if (currNode.node.left != null) {
+            queue.add(new QueueObj(currNode.node.left,currNode.hd - 1));              
+          }
+          if (currNode.node.right != null) {
+            queue.add(new QueueObj(currNode.node.right,currNode.hd + 1));           }
+      }
+      for  (Integer key: topViewData.keySet())   {
+          System.out.print(topViewData.get(key)+ " ");
+      }
+    }
