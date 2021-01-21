@@ -1,0 +1,26 @@
+public static Node insert(Node root,int data) {
+        Node newNode = new Node(data);
+    	Node node = root;
+    	Node prev = root;     
+        int flag = 0;   
+        if (root == null) {
+            return newNode;
+        }
+        while (node != null) {
+            if (node.data < data) { //traverse right
+                flag = 0;
+                prev = node;
+                node = node.right;
+            }else { //traverse left
+                flag = 1;
+                prev = node;
+                node = node.left;                
+            }
+        }
+        if (flag == 0) {
+            prev.right = newNode;
+        }else {
+            prev.left = newNode;            
+        }
+        return root;
+    }
