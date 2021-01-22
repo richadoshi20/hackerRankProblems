@@ -1,0 +1,19 @@
+	void decode(String s, Node root) {
+        
+      Node node = root;
+      int len = s.length();
+      int i = 0;
+      while (i < len) {
+          char temp = s.charAt(i);
+          if (temp == '0') {
+              node = node.left;
+          }else {
+              node = node.right;              
+          }
+          if (node.left == null && node.right == null) { //if leaf node
+              System.out.print(node.data+ "");
+              node = root;
+          }
+          i++;
+      }      
+    }
