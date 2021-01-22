@@ -1,0 +1,93 @@
+
+class TreeNode {
+        int data, depth;
+        TreeNode left, right ;
+        public TreeNode(int data, int depth)   {
+            this.data = data;
+            this.left = null;
+            this.left = null;
+            this.depth = depth;            
+        }
+        
+        public String toString() {
+            return "data: " + this.data;
+        }
+    }
+
+
+    public static void swap(TreeNode root, int k)    {
+        if  (root == null) return;
+        
+        if(root.depth % k == 0) {
+            TreeNode temp = root.left;
+            root.left = root.right;
+            root.right = temp;
+        }
+        
+        swap(root.left,k);
+        swap(root.right,k);
+    }
+    static int[][] swapNodes(int[][] indexes, int[] queries) {
+        int d=1;
+        Queue<Integer> q = new LinkedList<>();
+        Queue<TreeNode> nq = new LinkedList<>();
+        nq.add(new TreeNode(1,1));
+        TreeNode root = nq.peek();
+        nq.add(null);
+        for(int i=0; i<indexes.length ;i++) {   
+            q.add(indexes[i][0]);
+            q.add(indexes[i][1]);
+        }
+        int nodes = 0;
+        
+        while(!q.isEmpty()) {
+            System.out.println(q);
+            System.out.println(nq);
+            TreeNode currNode = nq.poll();
+            if (currNode != null)   {
+                Integer leftData = q.poll();
+                Integer rightData = q.poll();  
+                TreeNode leftNode = null;  
+                TreeNode rightNode = null;  
+                if  (leftData !=-1)   {
+                    nodes++;
+                    leftNode = new TreeNode(leftData,d+1);            
+                    nq.add(leftNode);                             
+                }                                       
+                if  (rightData !=-1)   {
+                    nodes++;                    
+                    rightNode = new TreeNode(rightData,d+1);     
+                    nq.add(rightNode);                                    
+                }                                       
+                currNode.left = leftNode;
+                currNode.right = rightNode;
+            }else   {
+                d++;
+                if  (!nq.isEmpty())
+                    nq.add(null);
+            }
+        }
+        System.out.println("Nodes:"+nodes)        ;
+        int result[][] = new int[queries.length][nodes+1];
+        List<Integer> abc=null;
+        for(int i = 0; i < queries.length; i++) {
+            abc=new ArrayList<>();
+            swap(root,queries[i]);
+            inOrderTraversal(root,abc);            
+            System.out.println(abc);
+            for(int j = 0; j < abc.size(); j++) {
+                result[i][j] = abc.get(j);
+            }
+        }
+        return result;
+
+    }
+     public static void inOrderTraversal(TreeNode root,List<Integer>abc) {
+         //left->root->right
+         if(root != null)   {
+             inOrderTraversal(root.left,abc);
+             abc.add(root.data);
+            //  System.out.println(root.data);
+             inOrderTraversal(root.right,abc);            
+         }     
+     }
